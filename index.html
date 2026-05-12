@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/principal.css">
+    <title>Rede de Acolhimento — REATRANS | IFSP Cubatão</title>
+</head>
+
+<body>
+    <!-- Link "Pular para conteúdo principal" para usuários de teclado/leitores de tela -->
+    <a href="#conteudo-principal" class="pular-navegacao">Pular para o conteúdo principal</a>
+
+    <header>
+        <div class="logomarca">
+            <a href="/" aria-label="Página inicial da Rede de Acolhimento">
+                <img src="logo.png" alt="Logotipo do Projeto Rede de Acolhimento" width="120" height="60">
+                <span class="nome-site">Rede de Acolhimento</span>
+            </a>
+        </div>
+        <nav aria-label="Menu principal">
+            <ul>
+                <li><a href="/">Início</a></li>
+                <li><a href="#informacoes">Informações</a></li>
+                <li><a href="#grupos">Grupos de Apoio</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+
+        <!-- Seção principal de ação -->
+        <section id="acao" aria-labelledby="titulo-acao">
+            <h1 id="titulo-acao">Um espaço de acolhimento, orientação e enfrentamento à LGBTQIA+fobia no campus</h1>
+            <p class="subtitulo">Você pode buscar apoio, entender seus direitos, registrar situações ou encontrar orientação no seu próprio ritmo.</p>
+            <h2 class="pergunta-acao">Do que você precisa agora?</h2>
+
+            <div class="cards-acao">
+                <div class="card-acao">
+                    <img src="imagens/ajuda.png" alt="">
+                    <a href="fluxos/apoio/" class="btn-caminho">Preciso de ajuda</a>
+                </div>
+                <div class="card-acao">
+                    <img src="imagens/vi.png" alt="">
+                    <a href="fluxo-testemunha.html" class="btn-caminho">Vi algo acontecer</a>
+                </div>
+                <div class="card-acao">
+                    <img src="imagens/informar.png" alt="">
+                    <a href="fluxo-entender.html" class="btn-caminho">Quero me informar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de informações (cards) -->
+        <section id="informacoes" aria-labelledby="titulo-informacoes">
+            <h2 id="titulo-informacoes">Informações e Recursos</h2>
+
+            <div class="cards-info">
+                <div class="card-info">
+                    <img src="imagens/exemplos.png" alt="">
+                    <div class="info-card">
+                        <h3>Isso foi preconceito?</h3>
+                        <p>Muitas situações de exclusão, constrangimento ou desrespeito passam despercebidas.</p>
+                        <p>Veja exemplos comuns e entenda melhor essas experiências.</p>
+                        <a href="exemplos.html" class="btn-link">Ver exemplos</a>
+                    </div>
+                </div>
+
+                <div class="card-info">
+                    <img src="imagens/processo.png" alt="">
+                    <div class="info-card">
+                        <h3>Como funciona o acolhimento?</h3>
+                        <p>Entenda como relatos são encaminhados, quais opções existem e o que acontece depois do envio.</p>
+                        <a href="processo.html" class="btn-link">Entender o processo</a>
+                    </div>
+                </div>
+
+                <div class="card-info">
+                    <img src="imagens/apoio.png" alt="">
+                    <div class="info-card">
+                        <h3>Como apoiar alguém</h3>
+                        <p>Saiba como acolher, intervir com segurança e orientar alguém que sofreu discriminação.</p>
+                        <a href="apoiar.html" class="btn-link">Ver orientações</a>
+                    </div>
+                </div>
+
+                <div class="card-info">
+                    <img src="imagens/dados.png" alt="">
+                    <div class="info-card">
+                        <h3>O que os relatos mostram</h3>
+                        <p>Dados anônimos ajudam a compreender padrões de violência, acolhimento e segurança no campus.</p>
+                        <a href="dados.html" class="btn-link">Visualizar dados</a>
+                    </div>
+                </div>
+
+                <div class="card-info">
+                    <img src="imagens/direitos.png" alt="">
+                    <div class="info-card">
+                        <h3>Você tem direitos</h3>
+                        <p>Entenda proteções relacionadas a nome social, identidade de gênero, discriminação e acolhimento institucional.</p>
+                        <a href="direitos.html" class="btn-link">Ver direitos</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de grupos de apoio -->
+        <section id="grupos" class="gruposApoio" aria-labelledby="grupos-titulo">
+            <h2 id="grupos-titulo">Grupos de apoio no Campus</h2>
+            <p class="descricao-secao">
+                O IFSP Campus Cubatão conta com uma rede de apoio estruturada para acolher, orientar e encaminhar estudantes em situações de violência ou sofrimento psíquico, com atenção especial às questões de gênero e sexualidade.
+            </p>
+
+            <div class="grupos-grid">
+
+                <!-- REATRANS -->
+                <article class="grupo-card" aria-labelledby="reatrans-nome">
+                    <div class="grupo-header">
+                        <img src="imagens/reatrans.jpg" alt="Encontro do REATRANS no Quilombo RACNEGÊ">
+                        <h3 id="reatrans-nome">REATRANS — Rede Antitransfobia</h3>
+                    </div>
+                    <div class="grupo-corpo">
+                        <p><strong>Formato:</strong> Grupo de Pesquisas</p>
+                        <p><strong>Encontros:</strong> Quinzenais (ou semanais, conforme demanda)</p>
+                        <p><strong>Local:</strong> Quilombo RACNEGÊ, Campus Cubatão</p>
+                        <p><strong>Contato inicial:</strong> <a href="mailto:cae.cbt@ifsp.edu.br">cae.cbt@ifsp.edu.br</a></p>
+                    </div>
+                    <div class="grupo-descricao">
+                        <p>
+                            Criado em 2023 a partir da demanda de alunas e alunos do Campus, em razão de episódios sistêmicos de transfobia nos cotidianos escolares. Tem por objetivo o combate a todas as formas de preconceito e opressão, atuando como Grupo de Pesquisas e institucionalizando suas ações por meio de pesquisas e eventos, cujo objeto são as questões LGBTQIAPN+.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Quilombo RACNEGÊ -->
+                <article class="grupo-card" aria-labelledby="racnege-nome">
+                    <div class="grupo-header">
+                        <img src="imagens/racnege.jpg" alt="Fachada do Quilombo RACNEGÊ no campus">
+                        <h3 id="racnege-nome">Quilombo RACNEGÊ</h3>
+                    </div>
+                    <div class="grupo-corpo">
+                        <p><strong>Formato:</strong> Grupo de Pesquisas sobre Raça, Culturas Negras e Gêneros</p>
+                        <p><strong>Local:</strong> Sede própria no Campus Cubatão</p>
+                        <p><strong>Contato:</strong> Prof. Dr. Antônio César Lins Rodrigues (líder do grupo)</p>
+                    </div>
+                    <div class="grupo-descricao">
+                        <p>
+                            Espaço dedicado à pesquisa e atividades sobre raça, culturas negras e gêneros, inaugurado em 2023. Sedia os encontros do REATRANS e promove um movimento de fortalecimento das representações excluídas, abrigando reuniões, manifestações artístico-culturais, grupos de estudo e encontros para grupos de trabalho. Aberto a toda comunidade acadêmica.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- CSP -->
+                <article class="grupo-card" aria-labelledby="csp-nome">
+                    <div class="grupo-header">
+                        <img src="imagens/csp.jpg" alt="Equipe da CSP em atendimento">
+                        <h3 id="csp-nome">Coordenadoria Sociopedagógica (CSP)</h3>
+                    </div>
+                    <div class="grupo-corpo">
+                        <p><strong>Serviço:</strong> Acolhimento psicológico, social e pedagógico</p>
+                        <p><strong>Telefone/WhatsApp:</strong> (13) 98197-0063</p>
+                        <p><strong>E-mail:</strong> <a href="mailto:csp.cbt@ifsp.edu.br">csp.cbt@ifsp.edu.br</a></p>
+                    </div>
+                    <div class="grupo-descricao">
+                        <p>
+                            Equipe multiprofissional composta por pedagogos, psicólogos, assistentes sociais, técnicos em assuntos educacionais, intérprete de Libras e profissional de AEE. Promove acolhimento e integração dos estudantes, acompanha processos de ensino-aprendizagem, atende e orienta estudantes e familiares no âmbito sociopsicoeducacional.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- NAPNE -->
+                <article class="grupo-card" aria-labelledby="napne-nome">
+                    <div class="grupo-header">
+                        <img src="imagens/napne.jpg" alt="Logotipo do NAPNE">
+                        <h3 id="napne-nome">NAPNE — Núcleo de Apoio às Pessoas com Necessidades Específicas</h3>
+                    </div>
+                    <div class="grupo-corpo">
+                        <p><strong>Serviço:</strong> Apoio a estudantes com necessidades educacionais específicas e ações de inclusão</p>
+                        <p><strong>Telefone:</strong> (13) 3346-5308</p>
+                        <p><strong>E-mail:</strong> <a href="mailto:napne.cbt@ifsp.edu.br">napne.cbt@ifsp.edu.br</a></p>
+                    </div>
+                    <div class="grupo-descricao">
+                        <p>
+                            Atua em ações de inclusão e adaptação para o atendimento a estudantes com deficiência, transtornos globais do desenvolvimento, altas habilidades e outras necessidades específicas. Colabora com a CSP em ações inclusivas e de combate ao preconceito.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- NUGS -->
+                <article class="grupo-card" aria-labelledby="nugs-nome">
+                    <div class="grupo-header">
+                        <img src="imagens/nugs.jpg" alt="Encontro do NUGS em evento">
+                        <h3 id="nugs-nome">NUGS — Núcleo de Estudos sobre Gênero e Sexualidade</h3>
+                    </div>
+                    <div class="grupo-corpo">
+                        <p><strong>Formato:</strong> Núcleo institucional do IFSP (presente em vários campi)</p>
+                        <p><strong>Site oficial:</strong> <a href="https://www.ifsp.edu.br/index.php/acoes-e-programas/106-reitoria/conselhos-e-nucleos/311-nugs-bemditaleessaaqui-png" target="_blank" rel="noopener noreferrer">Portal do NUGS<span class="sr-only"> (abre em nova aba)</span></a></p>
+                        <p><strong>Encontros:</strong> Eventos anuais e encontros formativos; edição de 2025 no Campus Cubatão.</p>
+                    </div>
+                    <div class="grupo-descricao">
+                        <p>
+                            Promove ações para uma educação inclusiva e não-sexista, visando à equidade de gênero, ao combate à violência e à discriminação contra a população LGBTQIAPN+. Estimula a produção científica sobre a temática e o cumprimento das legislações referentes às garantias de direito à vivência de identidades de gênero e sexualidade diversa.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="sobre" aria-labelledby="sobre-titulo">
+            <h2 id="sobre-titulo">Sobre este projeto</h2>
+            <p>Baseado na Cartilha de Combate à LGBTQIAPN+Fobia no Ambiente Educacional, produzida pelo Grupo de Pesquisas REATRANS do IFSP Campus Cubatão.</p>
+            <p>Este site é uma ferramenta de mediação digital para acolhimento, orientação e encaminhamento de denúncias.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Rede de Acolhimento — REATRANS | IFSP Campus Cubatão</p>
+        <p>Contato: <a href="mailto:cae.cbt@ifsp.edu.br">cae.cbt@ifsp.edu.br</a></p>
+    </footer>
+
+    <!-- Script do botão de saída rápida -->
+    <script src="js/sair-rapido.js"></script>
+</body>
+
+</html>
