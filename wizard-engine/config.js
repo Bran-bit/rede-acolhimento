@@ -1,3 +1,8 @@
+const BASE_URL = window.location.hostname.includes('github.io') 
+    ? '/rede-acolhimento' 
+    : '';
+
+
 export const CLASSES = {
     container:       'wizard-container',
     perguntaDestaque:'pergunta-destaque',
@@ -21,5 +26,5 @@ export const mapaAcoesExternas = {
     whatsappCSP:     'https://wa.me/5513981970063',
     emailCAE:        'mailto:cae.cbt@ifsp.edu.br',
     emailCSP:        'mailto:csp.cbt@ifsp.edu.br',
-    ondeBuscarApoio: '/artigos/grupos-apoio.html',
+    ondeBuscarApoio: `${BASE_URL}/artigos/grupos-apoio.html`,
 };
