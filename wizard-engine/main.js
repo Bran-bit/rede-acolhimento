@@ -1,4 +1,6 @@
 import './blocos/index.js';
+import './telas/acoes/index.js';
+import './opcoesLinks/index.js';
 
 import { CLASSES }             from './config.js';
 import { voltarTela }          from './navigation.js';

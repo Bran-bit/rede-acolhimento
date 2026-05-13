@@ -1,4 +1,3 @@
-
 const telaInicial = 'inicio';
 
 const telas = {
@@ -53,8 +52,8 @@ const telas = {
       { type: "paragraph", text: "A CSP oferece apoio psicológico, social e pedagógico." }
     ],
     options: [
-      { label: "WhatsApp – CAE", effect: { type: "whatsapp", key: "whatsappCAE" } },
-      { label: "WhatsApp – CSP", effect: { type: "whatsapp", key: "whatsappCSP" } }
+      { label: "WhatsApp – CAE", link: "whatsappCAE" },
+      { label: "WhatsApp – CSP", link: "whatsappCSP" }
     ]
   },
 
@@ -66,8 +65,8 @@ const telas = {
       { type: "paragraph", text: "A CSP oferece apoio psicológico, social e pedagógico." }
     ],
     options: [
-      { label: "E-mail – CAE", effect: { type: "mailto", key: "emailCAE" } },
-      { label: "E-mail – CSP", effect: { type: "mailto", key: "emailCSP" } },
+      { label: "E-mail – CAE", link: "emailCAE" },
+      { label: "E-mail – CSP", link: "emailCSP" },
       { label: "Quero ajuda para escrever o que aconteceu no e-mail", set: { modo_ajuda_redacao: "sim" }, next: "coleta_dados" }
     ]
   },
@@ -99,7 +98,7 @@ const telas = {
     ],
     options: [
       { label: "Quero conversar com alguém sobre isso", next: "canais" },
-      { label: "Quero saber mais sobre mediação e intervenção", effect: { type: "url", key: "artigoMediacao" } },
+      { label: "Quero saber mais sobre mediação e intervenção", link: "artigoMediacao" },
     ]
   },
 
@@ -110,7 +109,7 @@ const telas = {
       { type: "paragraph", text: "Também pode fazer um relato identificado, mas sigiloso — apenas as pessoas responsáveis pelo caso terão acesso." }
     ],
     options: [
-      { label: "Quero entender melhor os tipos de denúncia e o sigilo", effect: { type: "url", key: "artigoTiposDenuncia" } },
+      { label: "Quero entender melhor os tipos de denúncia e o sigilo", link: "artigoTiposDenuncia" },
       { label: "Quero iniciar um relato anônimo agora", set: { identificacao: "anonimo" }, next: "coleta_dados" }
     ]
   },
@@ -123,7 +122,7 @@ const telas = {
     ],
     options: [
       { label: "Quero saber como marcar atendimento", next: "contatos_psicologico" },
-      { label: "Quero conhecer outros espaços de apoio", effect: { type: "url", key: "ondeBuscarApoio" } },
+      { label: "Quero conhecer outros espaços de apoio", link: "ondeBuscarApoio" },
     ]
   },
 
@@ -133,8 +132,8 @@ const telas = {
       { type: "paragraph", text: "Atendimento psicológico: achar o contato (em breve mais detalhes)." }
     ],
     options: [
-      { label: "WhatsApp – CSP", effect: { type: "whatsapp", key: "whatsappCSP" } },
-      { label: "E-mail – CSP", effect: { type: "mailto", key: "emailCSP" } },
+      { label: "WhatsApp – CSP", link: "whatsappCSP" },
+      { label: "E-mail – CSP", link: "emailCSP" },
     ]
   },
 
@@ -147,7 +146,7 @@ const telas = {
     ],
     options: [
       { label: "Quero conversar com alguém para tirar dúvidas", next: "canais" },
-      { label: "Quero entender se certas situações envolvem preconceito", effect: { type: "url", key: "artigoExemplos" } },
+      { label: "Quero entender se certas situações envolvem preconceito", link: "artigoExemplos" },
       { label: "Quero elaborar melhor o que aconteceu", next: "risco_permanencia" }
     ]
   },
@@ -161,9 +160,9 @@ const telas = {
       {
         label: "Quero elaborar melhor o que aconteceu",
         next: "risco_permanencia",
-        hideIf: ["risco_permanencia", "tipo_violencia"]   // se essas chaves já existirem, esconde
+        hideIf: ["risco_permanencia", "tipo_violencia"]
       },
-      { label: "Quero ler sobre como funciona o acolhimento", effect: { type: "url", key: "artigoAcolhimento" } },
+      { label: "Quero ler sobre como funciona o acolhimento", link: "artigoAcolhimento" },
       { label: "Quero guardar os contatos", next: "canais" },
     ]
   },
@@ -263,7 +262,7 @@ expectativa: {
     options: [
         { label: "Registrar o ocorrido", next: "forma_contato" },
         { label: "Buscar apoio psicológico", next: "opcao_psicologico" },
-        { label: "Entrar em contato com um grupo de apoio", effect: { type: "url", key: "ondeBuscarApoio" } },
+        { label: "Entrar em contato com um grupo de apoio", link: "ondeBuscarApoio" },
         { label: "Ainda não tenho certeza", next: "opcao_calma" }
     ]
 },
@@ -285,11 +284,11 @@ expectativa: {
       { type: "paragraph", text: "Você pode usar qualquer um dos canais abaixo para relatar a situação no seu ritmo." },
     ],
     options: [
-      { label: "WhatsApp – CAE", effect: { type: "whatsapp", key: "whatsappCAE" } },
-      { label: "WhatsApp – CSP", effect: { type: "whatsapp", key: "whatsappCSP" } },
-      { label: "E-mail – CAE", effect: { type: "mailto", key: "emailCAE" } },
-      { label: "E-mail – CSP", effect: { type: "mailto", key: "emailCSP" } },
-      { label: "Atendimento presencial", effect: { type: "url", key: "presencial" } },
+      { label: "WhatsApp – CAE", link: "whatsappCAE" },
+      { label: "WhatsApp – CSP", link: "whatsappCSP" },
+      { label: "E-mail – CAE", link: "emailCAE" },
+      { label: "E-mail – CSP", link: "emailCSP" },
+      { label: "Atendimento presencial", link: "presencial" },
     ]
   },
 
@@ -357,11 +356,9 @@ expectativa: {
       { type: "divider" }
     ],
     defaultNext: function (state) {
-      // Quem só quer ajuda para redigir vai direto para revisão
       if (state.modo_ajuda_redacao?.valor === "sim") {
         return "relato_revisao";
       }
-      // Fluxo normal de denúncia: passa pela identificação
       return "relato_identificacao";
     },
     options: [

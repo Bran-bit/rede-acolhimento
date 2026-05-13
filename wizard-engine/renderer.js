@@ -1,7 +1,8 @@
-import { CLASSES, mapaAcoesExternas } from './config.js';
-import { salvarVarios, existe, obterTodas }       from './state.js';
+import { CLASSES, linksOpcoes } from './config.js';
+import { salvarVarios, existe, obterTodas } from './state.js';
 import { telaAtualId, navegarParaTela, atualizarBotaoVoltar } from './navigation.js';
-import { renderizarBloco }            from './registry.js';
+import { renderizarBloco } from './registry.js';
+import { resolverLink } from './resolverLinks.js';
 
 // ===== Opções =====
 
@@ -13,13 +14,13 @@ function deveOcultarOpcao(opcao) {
 
 function criarBotaoNavegacao(opcao, tela) {
     const botao = document.createElement('button');
-    botao.type        = 'button';
+    botao.type = 'button';
     botao.textContent = opcao.label;
 
     botao.addEventListener('click', () => {
         if (opcao.set) salvarVarios(opcao.set);
         const destinoBruto = opcao.next || tela.defaultNext;
-        const destino = typeof destinoBruto === 'function' 
+        const destino = typeof destinoBruto === 'function'
             ? destinoBruto(obterTodas())  // ← estado real
             : destinoBruto;
         if (destino) navegarParaTela(destino);
@@ -28,38 +29,43 @@ function criarBotaoNavegacao(opcao, tela) {
     return botao;
 }
 
+/**
+ * Cria um elemento <a> para uma opção que referencia um link externo.
+ * 
+ * 1. Busca a entrada em linksOpcoes pela chave `ref`.
+ * 2. Formata o valor bruto usando o formatador registrado para o tipo.
+ * 3. Retorna um link (<a>) com target="_blank", rel="noopener noreferrer"
+ *    e texto acessível indicando abertura em nova aba.
+ * 
+ * @param {Object} opcao - A opção da tela { label, link, set? }
+ * @returns {HTMLAnchorElement | Text} O link pronto ou um nó de texto se o link não for encontrado.
+ */
 function criarLinkExterno(opcao) {
-    const { type, key, url } = opcao.effect;
+    const ref = opcao.link;
 
-    let href = '#';
-    if (type === 'whatsapp' || type === 'mailto') {
-        href = mapaAcoesExternas[key] || '#';
-    } else if (type === 'url') {
-        href = url || mapaAcoesExternas[key] || '#';
+    let href;
+    try {
+        href = resolverLink(ref, linksOpcoes);
+    } catch (e) {
+        console.error(`[renderer] ${e.message}`);
+        return document.createTextNode(opcao.label);
     }
 
     const link = document.createElement('a');
     link.href = href;
     link.classList.add(CLASSES.linkExterno);
-
-    // Abertura em nova aba apenas para URLs que NÃO são mailto
-    if (type !== 'mailto') {
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-    }
-
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
     link.appendChild(document.createTextNode(opcao.label));
 
-    const srSpan = document.createElement('span');
-    srSpan.className = CLASSES.srOnly;
-    srSpan.textContent = type === 'mailto' 
-        ? ' (abre seu cliente de e-mail)' 
-        : ' (abre em nova aba)';
-    link.appendChild(srSpan);
+    const sr = document.createElement('span');
+    sr.className = CLASSES.srOnly;
+    sr.textContent = ' (abre em nova aba)';
+    link.appendChild(sr);
 
-    link.addEventListener('click', () => {
-        if (opcao.set) salvarVarios(opcao.set);
-    });
+    if (opcao.set) {
+        link.addEventListener('click', () => salvarVarios(opcao.set));
+    }
 
     return link;
 }
@@ -78,8 +84,8 @@ function criarListaOpcoes(tela) {
     lista.setAttribute('role', 'list');
 
     visiveis.forEach(opcao => {
-        const li      = document.createElement('li');
-        const control = opcao.effect
+        const li = document.createElement('li');
+        const control = opcao.link
             ? criarLinkExterno(opcao)
             : criarBotaoNavegacao(opcao, tela);
         li.appendChild(control);
@@ -99,7 +105,7 @@ function criarBotaoSubmit(tela) {
 
     botao.addEventListener('click', () => {
         const container = document.getElementById(CLASSES.container);
-        
+
         // Dispara blur em todos os campos para mostrar erros de validação
         const campos = container.querySelectorAll('input, textarea, select');
         campos.forEach(c => c.dispatchEvent(new Event('blur', { bubbles: true })));
@@ -108,7 +114,7 @@ function criarBotaoSubmit(tela) {
         setTimeout(() => {
             // Verifica se há campos inválidos
             const invalidos = container.querySelectorAll('[aria-invalid="true"], .campo-invalido');
-            
+
             if (invalidos.length > 0) {
                 invalidos[0].focus();
                 return;
@@ -146,8 +152,8 @@ export function renderizarTelaAtual() {
 
     // Título
     const h1 = document.createElement('h1');
-    h1.id          = `titulo-${telaAtualId}`;
-    h1.tabIndex    = -1;
+    h1.id = `titulo-${telaAtualId}`;
+    h1.tabIndex = -1;
     h1.textContent = tela.title;
     container.appendChild(h1);
     container.setAttribute('aria-labelledby', h1.id);
