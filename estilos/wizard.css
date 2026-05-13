@@ -361,3 +361,7 @@ fieldset.campo-invalido {
 #btn-voltar[hidden] {
     display: none !important;
 }
+
+.acao-externa [aria-label="abre em nova aba"] {
+    margin-left: 0.3em;
+}

@@ -1,4 +1,4 @@
-import { CLASSES, linksOpcoes } from './config.js';
+import { CLASSES, linksOpcoes } from './config/index.js';
 import { salvarVarios, existe, obterTodas } from './state.js';
 import { telaAtualId, navegarParaTela, atualizarBotaoVoltar } from './navigation.js';
 import { renderizarBloco } from './registry.js';
@@ -12,7 +12,7 @@ function deveOcultarOpcao(opcao) {
         : false;
 }
 
-function criarBotaoNavegacao(opcao, tela) {
+function renderizarOpcaoNavegacao(opcao, tela) {
     const botao = document.createElement('button');
     botao.type = 'button';
     botao.textContent = opcao.label;
@@ -21,7 +21,7 @@ function criarBotaoNavegacao(opcao, tela) {
         if (opcao.set) salvarVarios(opcao.set);
         const destinoBruto = opcao.next || tela.defaultNext;
         const destino = typeof destinoBruto === 'function'
-            ? destinoBruto(obterTodas())  // ← estado real
+            ? destinoBruto(obterTodas())  
             : destinoBruto;
         if (destino) navegarParaTela(destino);
     });
@@ -29,45 +29,31 @@ function criarBotaoNavegacao(opcao, tela) {
     return botao;
 }
 
-/**
- * Cria um elemento <a> para uma opção que referencia um link externo.
- * 
- * 1. Busca a entrada em linksOpcoes pela chave `ref`.
- * 2. Formata o valor bruto usando o formatador registrado para o tipo.
- * 3. Retorna um link (<a>) com target="_blank", rel="noopener noreferrer"
- *    e texto acessível indicando abertura em nova aba.
- * 
- * @param {Object} opcao - A opção da tela { label, link, set? }
- * @returns {HTMLAnchorElement | Text} O link pronto ou um nó de texto se o link não for encontrado.
- */
-function criarLinkExterno(opcao) {
-    const ref = opcao.link;
+function renderizarOpcaoLink(opcao) {
+   const linkValido = resolverLink(opcao.link, linksOpcoes);
+   if(!linkValido) return null;
 
-    let href;
-    try {
-        href = resolverLink(ref, linksOpcoes);
-    } catch (e) {
-        console.error(`[renderer] ${e.message}`);
-        return document.createTextNode(opcao.label);
-    }
-
-    const link = document.createElement('a');
-    link.href = href;
-    link.classList.add(CLASSES.linkExterno);
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.appendChild(document.createTextNode(opcao.label));
-
-    const sr = document.createElement('span');
-    sr.className = CLASSES.srOnly;
-    sr.textContent = ' (abre em nova aba)';
-    link.appendChild(sr);
+    const elementoLink = document.createElement('a');
+    elementoLink.href = linkValido;
+    elementoLink.classList.add(CLASSES.linkExterno);
+    elementoLink.target = '_blank';
+    elementoLink.rel = 'noopener noreferrer';
+    
+    // Texto visível do link
+    elementoLink.appendChild(document.createTextNode(opcao.label));
+    
+    // Ícone com aria-label para leitores de tela
+    const icone = document.createElement('span');
+    icone.setAttribute('aria-label', 'abre em nova aba');
+    icone.setAttribute('role', 'img');
+    icone.textContent = ' ↗';
+    elementoLink.appendChild(icone);
 
     if (opcao.set) {
-        link.addEventListener('click', () => salvarVarios(opcao.set));
+        elementoLink.addEventListener('click', () => salvarVarios(opcao.set));
     }
 
-    return link;
+    return elementoLink;
 }
 
 function criarListaOpcoes(tela) {
@@ -84,20 +70,22 @@ function criarListaOpcoes(tela) {
     lista.setAttribute('role', 'list');
 
     visiveis.forEach(opcao => {
+        const controle = opcao.link
+            ? renderizarOpcaoLink(opcao)
+            : renderizarOpcaoNavegacao(opcao, tela);
+        // se a opção não contém tudo que é necessário pra renderizar
+        if (!controle) return; 
+
         const li = document.createElement('li');
-        const control = opcao.link
-            ? criarLinkExterno(opcao)
-            : criarBotaoNavegacao(opcao, tela);
-        li.appendChild(control);
+        li.appendChild(controle);
         lista.appendChild(li);
     });
-
     return lista;
 }
 
 // ===== Formulário (telas com submit) =====
 
-function criarBotaoSubmit(tela) {
+function renderizarBotaoEnviar(tela) {
     const botao = document.createElement('button');
     botao.type = 'button';
     botao.textContent = tela.submit.label;
@@ -168,7 +156,7 @@ export function renderizarTelaAtual() {
 
     // Opções de navegação OU botão submit
     if (tela.submit) {
-        container.appendChild(criarBotaoSubmit(tela));
+        container.appendChild(renderizarBotaoEnviar(tela));
     } else {
         container.appendChild(criarListaOpcoes(tela));
     }
